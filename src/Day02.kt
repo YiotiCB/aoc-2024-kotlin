@@ -1,14 +1,12 @@
-import kotlin.math.abs
-
 fun main() {
     fun prepareInput(input: List<String>): List<List<Int>> {
         return input.map { it.split(" ").map { num -> num.toInt() } }
     }
 
 
-    fun isSafe(list: List<Int>):Boolean {
+    fun isSafe(list: List<Int>): Boolean {
         val differences = list.windowed(2).map { it[1] - it[0] }
-        return differences.all{ it in 1..3 } || differences.all { it<0 && it>=-3}
+        return differences.all { it in 1..3 } || differences.all { it < 0 && it >= -3 }
     }
 
     fun part1(input: List<String>): Int {
@@ -27,8 +25,8 @@ fun main() {
         var sum = 0
         preparedInput.map {
             if ((isSafe(it)) || (0..it.size).any { index ->
-                isSafe(it.take(index) + it.drop(index + 1))
-            }) {
+                    isSafe(it.take(index) + it.drop(index + 1))
+                }) {
                 sum++
             }
         }
